@@ -1,6 +1,6 @@
 import express, { Application, Request, Response } from 'express'
+import usersRouter from '../src/app/modules/users.routes'
 import cors from 'cors'
-import usersService from './app/modules/users.service'
 const app: Application = express()
 
 app.use(cors())
@@ -9,13 +9,11 @@ app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
+//application routes
+app.use('/api/v1/users/', usersRouter)
+
 //routes
 app.get('/', async (req: Request, res: Response) => {
-  await usersService.createUser({
-    id: '111',
-    password: 'admin1',
-    role: 'admin',
-  })
   res.send('University Management Service')
 })
 
