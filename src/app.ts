@@ -21,10 +21,10 @@ app.use('/api/v1/users/', UserRoutes)
 // })
 
 //testing
-app.get('/', async (req: Request, res: Response) => {
-  // throw new ApiError(400, 'Something Wrong')
-  console.log(x)
-})
+// app.get('/', async (req: Request, res: Response) => {
+//   // throw new ApiError(400, 'Something Wrong')
+//   console.log(x)
+// })
 
 app.use(globalErrorHandler)
 

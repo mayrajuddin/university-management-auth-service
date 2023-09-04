@@ -3,6 +3,11 @@ import app from './app'
 import config from './config'
 import { logger, errorLogger } from './shared/logger'
 import { Server } from 'http'
+
+process.on('unhandledRejection', error => {
+  errorLogger.error(error)
+  process.exit(1)
+})
 let server: Server
 async function main() {
   try {
@@ -31,3 +36,9 @@ async function main() {
 }
 
 main()
+process.on('SIGTERM', () => {
+  logger.info('SIGTERM is Recived')
+  if (server) {
+    server.close()
+  }
+})
