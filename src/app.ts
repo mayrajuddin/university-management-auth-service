@@ -15,10 +15,9 @@ app.use(express.urlencoded({ extended: true }))
 app.use('/api/v1/users/', UserRoutes)
 
 //routes
-// app.get('/', (req: Request, res: Response) => {
-//   //res.send('University Management Service')
-//
-// })
+app.get('/', (req: Request, res: Response) => {
+  res.send('University Management Service')
+})
 
 //testing
 // app.get('/', async (req: Request, res: Response) => {
