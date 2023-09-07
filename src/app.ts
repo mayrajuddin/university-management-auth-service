@@ -1,23 +1,23 @@
-import express, { Application, Request, Response } from 'express'
-import cors from 'cors'
-import globalErrorHandler from './app/middlewares/globalErrorHandler'
-import { UserRoutes } from './app/modules/user.routes'
+import express, { Application, Request, Response } from 'express';
+import cors from 'cors';
+import globalErrorHandler from './app/middlewares/globalErrorHandler';
+import { UserRoutes } from './app/modules/user/user.routes';
 // import ApiError from './errors/ApiErrors'
 
-const app: Application = express()
+const app: Application = express();
 
-app.use(cors())
+app.use(cors());
 
 //perser
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 //application routes
-app.use('/api/v1/users/', UserRoutes)
+app.use('/api/v1/users/', UserRoutes);
 
 //routes
 app.get('/', (req: Request, res: Response) => {
-  res.send('University Management Service')
-})
+  res.send('University Management Service');
+});
 
 //testing
 // app.get('/', async (req: Request, res: Response) => {
@@ -25,6 +25,6 @@ app.get('/', (req: Request, res: Response) => {
 //   console.log(x)
 // })
 
-app.use(globalErrorHandler)
+app.use(globalErrorHandler);
 
-export default app
+export default app;
