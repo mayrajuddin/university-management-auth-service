@@ -4,7 +4,6 @@ import { AcademicSemesterService } from './academicSemester.Service';
 const createSemester: RequestHandler = async (req, res, next) => {
   try {
     const { ...academicSemesterData } = req.body;
-    console.log(academicSemesterData, 'From controller');
     const result = await AcademicSemesterService.createAcademicSemester(
       academicSemesterData,
     );

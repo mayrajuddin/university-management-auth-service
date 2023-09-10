@@ -8,6 +8,7 @@ import {
   academicSemesterMonths,
   academicSemesterTitle,
 } from './academicSemesterConstant';
+import ApiError from '../../../errors/ApiErrors';
 
 const academicSemesterSchema = new Schema<IAcademicSemester>(
   {
@@ -23,6 +24,19 @@ const academicSemesterSchema = new Schema<IAcademicSemester>(
   },
   { timestamps: true },
 );
+// fix same year double semester ex. 2023 fall | fall  not valid
+
+academicSemesterSchema.pre('save', async function (next) {
+  const isExist = await AcademicSemester.findOne({
+    title: this.title,
+    year: this.year,
+  });
+  if (isExist) {
+    throw new ApiError(409, 'Academic Semester Already Exist ! ');
+  }
+  next();
+});
+
 export const AcademicSemester = model<IAcademicSemester, academicSemesterModel>(
   'AcademicSemester',
   academicSemesterSchema,
