@@ -23,7 +23,7 @@ const academicSemesterSchema = new Schema<IAcademicSemester>(
   },
   { timestamps: true },
 );
-export const academicSemester = model<IAcademicSemester, academicSemesterModel>(
-  'academicSemester',
+export const AcademicSemester = model<IAcademicSemester, academicSemesterModel>(
+  'AcademicSemester',
   academicSemesterSchema,
 );
