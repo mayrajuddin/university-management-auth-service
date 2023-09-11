@@ -9,7 +9,7 @@ import {
   academicSemesterTitle,
 } from './academicSemesterConstant';
 import ApiError from '../../../errors/ApiErrors';
-
+import status from 'http-status';
 const academicSemesterSchema = new Schema<IAcademicSemester>(
   {
     title: {
@@ -32,7 +32,7 @@ academicSemesterSchema.pre('save', async function (next) {
     year: this.year,
   });
   if (isExist) {
-    throw new ApiError(409, 'Academic Semester Already Exist ! ');
+    throw new ApiError(status.CONFLICT, 'Academic Semester Already Exist ! ');
   }
   next();
 });
