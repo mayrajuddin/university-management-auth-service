@@ -1,4 +1,5 @@
 import ApiError from '../../../errors/ApiErrors';
+import { IPaginations } from '../../../interface/pagination';
 import { IAcademicSemester } from './academicSemester.Interface';
 import { AcademicSemester } from './academicSemester.Model';
 import { academicSemesterTitleCodeMapper } from './academicSemesterConstant';
@@ -12,4 +13,9 @@ const createAcademicSemester = async (
   const result = await AcademicSemester.create(payload);
   return result;
 };
-export const AcademicSemesterService = { createAcademicSemester };
+
+const getAllSemesters = (pagination: IPaginations) => {};
+export const AcademicSemesterService = {
+  createAcademicSemester,
+  getAllSemesters,
+};
