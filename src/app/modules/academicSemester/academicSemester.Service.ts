@@ -1,4 +1,5 @@
 import ApiError from '../../../errors/ApiErrors';
+import { IGenericResponse } from '../../../interface/common';
 import { IPaginations } from '../../../interface/pagination';
 import { IAcademicSemester } from './academicSemester.Interface';
 import { AcademicSemester } from './academicSemester.Model';
@@ -14,7 +15,23 @@ const createAcademicSemester = async (
   return result;
 };
 
-const getAllSemesters = (pagination: IPaginations) => {};
+const getAllSemesters = async (
+  pagination: IPaginations,
+): Promise<IGenericResponse<IAcademicSemester[]>> => {
+  const { page = 1, limit = 10 } = pagination;
+  const skip = (page - 1) * limit;
+  const result = await AcademicSemester.find().sort().skip(skip).limit(limit);
+  const total = await AcademicSemester.countDocuments();
+
+  return {
+    meta: {
+      page,
+      limit,
+      total,
+    },
+    data: result,
+  };
+};
 export const AcademicSemesterService = {
   createAcademicSemester,
   getAllSemesters,
