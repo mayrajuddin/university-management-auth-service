@@ -1,0 +1,1 @@
+2023-09-17T05:33:39.251Z [right meow!] error: Cast to number failed for value "i" (type string) at path "year" for model "AcademicSemester"
