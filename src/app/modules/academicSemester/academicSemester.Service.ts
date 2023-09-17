@@ -8,7 +8,10 @@ import {
   IAcademicSemesterFilter,
 } from './academicSemester.Interface';
 import { AcademicSemester } from './academicSemester.Model';
-import { academicSemesterTitleCodeMapper } from './academicSemesterConstant';
+import {
+  academicSemesterTitleCodeMapper,
+  searchFields,
+} from './academicSemesterConstant';
 import status from 'http-status';
 const createAcademicSemester = async (
   payload: IAcademicSemester,
@@ -27,11 +30,11 @@ const getAllSemesters = async (
   const { page, limit, skip, sortBy, sortOrder } =
     paginationHelper.calculatePagination(pagination);
   const sortConditon: { [key: string]: SortOrder } = {};
-  const { searchTerm } = filters;
+  const { searchTerm, ...filtersData } = filters;
   if (sortBy && sortOrder) {
     sortConditon[sortBy] = sortOrder;
   }
-  const searchFields = ['title', 'code', 'year'];
+
   const andCondition = [];
   if (searchTerm) {
     andCondition.push({
@@ -40,15 +43,13 @@ const getAllSemesters = async (
       })),
     });
   }
-  // const and = [
-  //   {
-  //     $or: [
-  //       { title: { $regex: searchTerm, $options: 'i' } },
-  //       { code: { $regex: searchTerm, $options: 'i' } },
-  //       { year: { $regex: searchTerm, $options: 'i' } },
-  //     ],
-  //   },
-  // ];
+  if (Object.keys(filtersData).length) {
+    andCondition.push({
+      $and: Object.entries(filtersData).map(([field, value]) => ({
+        [field]: value,
+      })),
+    });
+  }
   const result = await AcademicSemester.find({ $and: andCondition })
     .sort(sortConditon)
     .skip(skip)
