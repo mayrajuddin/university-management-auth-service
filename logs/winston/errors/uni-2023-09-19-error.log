@@ -7,3 +7,6 @@
 2023-09-19T16:04:59.902Z [right meow!] error: Cast to ObjectId failed for value "6506962a599c9c993" (type string) at path "_id" for model "AcademicSemester"
 2023-09-19T16:13:32.573Z [right meow!] error: Cast to ObjectId failed for value "6506962a599c9c993" (type string) at path "_id" for model "AcademicSemester"
 2023-09-19T16:16:22.592Z [right meow!] error: Cast to ObjectId failed for value "6506962a599c9c993a1ad7" (type string) at path "_id" for model "AcademicSemester"
+2023-09-19T16:19:48.713Z [right meow!] error: Cast to ObjectId failed for value "65069622599c9c993a1a" (type string) at path "_id" for model "AcademicSemester"
+2023-09-19T16:23:20.882Z [right meow!] error: Cast to ObjectId failed for value "65069622599c9c993a1a" (type string) at path "_id" for model "AcademicSemester"
+2023-09-19T16:50:25.035Z [right meow!] error: Cast to ObjectId failed for value "65069622599c9c993a1a" (type string) at path "_id" for model "AcademicSemester"
