@@ -8,6 +8,7 @@ import ApiError from '../../errors/ApiErrors';
 import { errorLogger } from '../../shared/logger';
 import { ZodError } from 'zod';
 import handleZodError from '../../errors/handleZodError';
+import handleCastError from '../../errors/handleCastError';
 //global error handler
 const globalErrorHandler: ErrorRequestHandler = (
   error,
@@ -24,6 +25,12 @@ const globalErrorHandler: ErrorRequestHandler = (
 
   if (error?.name === 'ValidationError') {
     const simplifyError = handleValidationError(error);
+    statusCode = simplifyError.statusCode;
+    message = simplifyError.message;
+    errorMessages = simplifyError.errorMessages;
+  } else if (error?.name === 'CastError') {
+    //res.status(200).json({ error });
+    const simplifyError = handleCastError(error);
     statusCode = simplifyError.statusCode;
     message = simplifyError.message;
     errorMessages = simplifyError.errorMessages;
