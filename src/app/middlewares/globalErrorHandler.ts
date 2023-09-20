@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-console */
-import { ErrorRequestHandler, NextFunction, Request, Response } from 'express';
+import { ErrorRequestHandler, Request, Response } from 'express';
 import config from '../../config';
 import { IGenericMessage } from '../../interface/error';
 import handleValidationError from '../../errors/handleValidationError';
@@ -14,7 +14,6 @@ const globalErrorHandler: ErrorRequestHandler = (
   error,
   req: Request,
   res: Response,
-  next: NextFunction,
 ) => {
   config.env === 'development'
     ? console.log('Error Comming From GlobalErrorHanlder', error)
@@ -57,7 +56,6 @@ const globalErrorHandler: ErrorRequestHandler = (
     errorMessages,
     stack: config.env !== 'production' ? error?.stack : undefined,
   });
-  next();
 };
 
 export default globalErrorHandler;
