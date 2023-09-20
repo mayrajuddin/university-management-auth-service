@@ -62,6 +62,8 @@ const getSingleSemester = catchAsync(
     next();
   },
 );
+
+// update specific Semester
 const updateSemester = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const id = req.params.id;
