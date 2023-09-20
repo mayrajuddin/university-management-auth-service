@@ -4,6 +4,9 @@ import { academicFacultyService } from './academicFaculty.Service';
 import sendResponse from '../../../shared/sendResponse';
 import httpStatus from 'http-status';
 import { IAcademicFaculty } from './academicFaculty.Interface';
+import pick from '../../../shared/pick';
+import { academicFacultyFilterAbleField } from './academicFacultyConstant';
+import { paginationFields } from '../../../constants/paginations';
 
 const createFaculty = catchAsync(async (req: Request, res: Response) => {
   const { ...academicFacultyData } = req.body;
@@ -19,7 +22,22 @@ const createFaculty = catchAsync(async (req: Request, res: Response) => {
     data: result,
   });
 });
-
+const getAllFaculties = catchAsync(async (req: Request, res: Response) => {
+  const filter = pick(req.query, academicFacultyFilterAbleField);
+  const paginationOptions = pick(req.query, paginationFields);
+  const result = await academicFacultyService.getAllFaculties(
+    filter,
+    paginationOptions,
+  );
+  sendResponse<IAcademicFaculty[]>(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Get Academic Faculties Successfully!',
+    meta: result.meta,
+    data: result.data,
+  });
+});
 export const academicFacultyController = {
   createFaculty,
+  getAllFaculties,
 };
