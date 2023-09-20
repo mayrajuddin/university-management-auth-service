@@ -1,7 +1,7 @@
-import express, { Application, NextFunction, Request, Response } from 'express';
+import express, { Application, Request, Response } from 'express';
 import cors from 'cors';
 import globalErrorHandler from './app/middlewares/globalErrorHandler';
-import router from './app/routes/routes';
+import router from './app/routes';
 import httpStatus from 'http-status';
 // import ApiError from './errors/ApiErrors'
 
@@ -32,7 +32,7 @@ app.get('/', (req: Request, res: Response) => {
 app.use(globalErrorHandler);
 
 //handle not found route
-app.use((req: Request, res: Response, next: NextFunction) => {
+app.use((req: Request, res: Response) => {
   res.status(httpStatus.BAD_REQUEST).json({
     success: false,
     message: 'Route Not Found',
