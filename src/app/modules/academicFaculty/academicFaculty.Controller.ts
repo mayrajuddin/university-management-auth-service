@@ -48,8 +48,31 @@ const getSingleFaculty = catchAsync(async (req: Request, res: Response) => {
     data: result,
   });
 });
+const updateFaculty = catchAsync(async (req: Request, res: Response) => {
+  const id = req.params.id;
+  const updatedData = req.body;
+  const result = await academicFacultyService.updateFaculty(id, updatedData);
+  sendResponse<IAcademicFaculty>(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Academic Faculty updated Successfully!',
+    data: result,
+  });
+});
+const deleteFaculty = catchAsync(async (req: Request, res: Response) => {
+  const id = req.params.id;
+  const result = await academicFacultyService.deleteFaculty(id);
+  sendResponse<IAcademicFaculty>(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Academic Faculty deleted Successfully!',
+    data: result,
+  });
+});
 export const academicFacultyController = {
   createFaculty,
   getAllFaculties,
   getSingleFaculty,
+  updateFaculty,
+  deleteFaculty,
 };
