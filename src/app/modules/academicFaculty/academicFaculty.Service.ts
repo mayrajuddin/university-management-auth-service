@@ -57,7 +57,22 @@ const getAllFaculties = async (
     data: result,
   };
 };
+const getSingleFaculty = async (
+  id: string,
+): Promise<IAcademicFaculty | null> => {
+  const result = await AcademicFaculty.findById(id);
+  return result;
+};
+const updateFaculty = async (id: string, payload: IAcademicFaculty) => {
+  const result = await AcademicFaculty.findOneAndUpdate({ _id: id }, payload, {
+    new: true,
+  });
+
+  return result;
+};
 export const academicFacultyService = {
   createAcademicFaculty,
   getAllFaculties,
+  getSingleFaculty,
+  updateFaculty,
 };
