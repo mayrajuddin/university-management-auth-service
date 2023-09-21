@@ -10,7 +10,12 @@ const academicFacultySchema = new Schema<IAcademicFaculty>(
       unique: true,
     },
   },
-  { timestamps: true },
+  {
+    timestamps: true,
+    toJSON: {
+      virtuals: true,
+    },
+  },
 );
 export const AcademicFaculty = model<IAcademicFaculty, academicSemesterModel>(
   'academicFaculty',
