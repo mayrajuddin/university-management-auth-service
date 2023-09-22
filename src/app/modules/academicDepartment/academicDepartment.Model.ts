@@ -10,6 +10,8 @@ const academicDepartmentSchema = new Schema<IAcademicDepartment>(
     },
     academicFaculty: {
       type: Schema.Types.ObjectId,
+      ref: 'academicFaculty',
+      required: true,
     },
   },
   { timestamps: true, toJSON: { virtuals: true } },
