@@ -9,4 +9,5 @@ router.post(
   validateRequest(academicDepartmentValidation.academicDepartmentZodSchema),
   academicDepartmentController.createAcademicDepartment,
 );
+router.get('/', academicDepartmentController.getAllAcademicDepartment);
 export const AcademicDepartmentRoutes = router;

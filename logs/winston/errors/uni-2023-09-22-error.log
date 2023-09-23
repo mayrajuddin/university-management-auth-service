@@ -1,0 +1,4 @@
+2023-09-22T17:56:13.636Z [right meow!] error: Schema hasn't been registered for model "AcademicFaculty".
+Use mongoose.model(name, schema)
+2023-09-22T17:57:16.551Z [right meow!] error: Schema hasn't been registered for model "AcademicFaculty".
+Use mongoose.model(name, schema)
