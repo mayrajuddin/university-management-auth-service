@@ -10,6 +10,13 @@ const academicDepartmentZodSchema = z.object({
     }),
   }),
 });
+const updateAcademicDepartmentZodSchema = z.object({
+  body: z.object({
+    title: z.string().optional(),
+    academicFaculty: z.string().optional(),
+  }),
+});
 export const academicDepartmentValidation = {
   academicDepartmentZodSchema,
+  updateAcademicDepartmentZodSchema,
 };

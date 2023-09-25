@@ -9,8 +9,14 @@ router.post(
   validateRequest(academicDepartmentValidation.academicDepartmentZodSchema),
   academicDepartmentController.createAcademicDepartment,
 );
-router.get('/:id');
-router.patch('/:id');
-router.delete('/:id');
+router.get('/:id', academicDepartmentController.getAcademicDepartment);
+router.patch(
+  '/:id',
+  validateRequest(
+    academicDepartmentValidation.updateAcademicDepartmentZodSchema,
+  ),
+  academicDepartmentController.updateAcademicDepartment,
+);
+router.delete('/:id', academicDepartmentController.deleteAcademicDepartment);
 router.get('/', academicDepartmentController.getAllAcademicDepartment);
 export const AcademicDepartmentRoutes = router;
