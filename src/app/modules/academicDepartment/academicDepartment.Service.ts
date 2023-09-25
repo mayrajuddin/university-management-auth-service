@@ -58,7 +58,34 @@ const getAllAcademicDepartment = async (
     data: result,
   };
 };
+const getAcademicDepartment = async (
+  id: string,
+): Promise<IAcademicDepartment | null> => {
+  const result = await academicDepartment.findById(id);
+  return result;
+};
+
+const updateAcademicDepartment = async (
+  id: string,
+  payload: IAcademicDepartment,
+): Promise<IAcademicDepartment | null> => {
+  const result = await academicDepartment.findByIdAndUpdate(
+    { _id: id },
+    payload,
+    { new: true },
+  );
+  return result;
+};
+const deleteAcademicDepartment = async (
+  id: string,
+): Promise<IAcademicDepartment | null> => {
+  const result = await academicDepartment.findByIdAndDelete(id);
+  return result;
+};
 export const academicDepartmentService = {
   createAcademicDepartment,
   getAllAcademicDepartment,
+  getAcademicDepartment,
+  updateAcademicDepartment,
+  deleteAcademicDepartment,
 };
