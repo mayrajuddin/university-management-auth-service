@@ -42,7 +42,7 @@ const getAllAcademicDepartment = catchAsync(
 
 const getAcademicDepartment = catchAsync(
   async (req: Request, res: Response) => {
-    const id = req.params.id;
+    const { id } = req.params;
     const result = await academicDepartmentService.getAcademicDepartment(id);
     sendResponse<IAcademicDepartment>(res, {
       statusCode: httpStatus.OK,
@@ -55,7 +55,7 @@ const getAcademicDepartment = catchAsync(
 
 const updateAcademicDepartment = catchAsync(
   async (req: Request, res: Response) => {
-    const id = req.params.id;
+    const { id } = req.params;
     const updatedData = req.body;
     const result = await academicDepartmentService.updateAcademicDepartment(
       id,
@@ -71,7 +71,7 @@ const updateAcademicDepartment = catchAsync(
 );
 const deleteAcademicDepartment = catchAsync(
   async (req: Request, res: Response) => {
-    const id = req.params.id;
+    const { id } = req.params;
     const result = await academicDepartmentService.deleteAcademicDepartment(id);
     sendResponse(res, {
       statusCode: httpStatus.OK,

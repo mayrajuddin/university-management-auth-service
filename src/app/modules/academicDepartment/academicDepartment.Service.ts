@@ -61,7 +61,9 @@ const getAllAcademicDepartment = async (
 const getAcademicDepartment = async (
   id: string,
 ): Promise<IAcademicDepartment | null> => {
-  const result = await academicDepartment.findById(id);
+  const result = await academicDepartment
+    .findById(id)
+    .populate('academicFaculty');
   return result;
 };
 
@@ -69,11 +71,9 @@ const updateAcademicDepartment = async (
   id: string,
   payload: IAcademicDepartment,
 ): Promise<IAcademicDepartment | null> => {
-  const result = await academicDepartment.findByIdAndUpdate(
-    { _id: id },
-    payload,
-    { new: true },
-  );
+  const result = await academicDepartment
+    .findByIdAndUpdate({ _id: id }, payload, { new: true })
+    .populate('academicFaculty');
   return result;
 };
 const deleteAcademicDepartment = async (
