@@ -3,6 +3,7 @@ import cors from 'cors';
 import globalErrorHandler from './app/middlewares/globalErrorHandler';
 import router from './app/routes';
 import httpStatus from 'http-status';
+import { generateStudentId } from './app/modules/user/users.utilis';
 // import ApiError from './errors/ApiErrors'
 
 const app: Application = express();
@@ -44,4 +45,15 @@ app.use((req: Request, res: Response) => {
     ],
   });
 });
+
+const academicSemester = {
+  code: '01',
+  year: '2024',
+};
+
+const testId = async () => {
+  const testId = await generateStudentId(academicSemester);
+  console.log(testId);
+};
+testId();
 export default app;
