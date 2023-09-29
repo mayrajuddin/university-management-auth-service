@@ -16,6 +16,21 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
+    student: {
+      type: Schema.Types.ObjectId,
+      require: true,
+      ref: 'student',
+    },
+    faculty: {
+      type: Schema.Types.ObjectId,
+      require: true,
+      ref: 'faculty',
+    },
+    admin: {
+      type: Schema.Types.ObjectId,
+      require: true,
+      ref: 'admin',
+    },
   },
   {
     timestamps: true,

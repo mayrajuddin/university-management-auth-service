@@ -1,6 +1,7 @@
 import { Schema, model } from 'mongoose';
+import { IStudent, StudentModel } from './student.interface';
 
-const studentSchema = new Schema<IStudent, StudentModel>(
+export const StudentSchema = new Schema<IStudent, StudentModel>(
   {
     id: {
       type: String,
@@ -92,4 +93,4 @@ const studentSchema = new Schema<IStudent, StudentModel>(
   { timestamps: true, toJSON: { virtuals: true } },
 );
 
-export const Student = model<IStudent, StudentModel>('Student', studentSchema);
+export const Student = model<IStudent, StudentModel>('Student', StudentSchema);
