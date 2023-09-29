@@ -7,7 +7,7 @@ export const findLastStudentId = async () => {
       createdAt: -1,
     })
     .lean();
-  return lastStudent?.id;
+  return lastStudent?.id ? lastStudent.id.substring(4) : undefined;
 };
 
 export const generateStudentId = async (
@@ -28,7 +28,7 @@ export const findLastFacultyId = async () => {
       createdAt: -1,
     })
     .lean();
-  return lastFaculty?.id;
+  return lastFaculty?.id ? lastFaculty.id.substring(4) : undefined;
 };
 export const generateFacultyId = async () => {
   const currentId =

@@ -2,10 +2,14 @@ import config from '../../../config';
 import apiError from '../../../errors/ApiErrors';
 import { IUser } from './user.interface';
 import { User } from './user.model';
-import { generateUserId } from './users.utilis';
+import { generateStudentId } from './users.utilis';
 
 const createUser = async (user: IUser): Promise<IUser | null> => {
-  const id = await generateUserId();
+  const test = {
+    code: '01',
+    year: '2023',
+  };
+  const id = await generateStudentId(test);
 
   // set user id to the generated id
   user.id = id;
