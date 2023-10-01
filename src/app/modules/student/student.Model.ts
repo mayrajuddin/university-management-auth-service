@@ -1,7 +1,8 @@
 import { Schema, model } from 'mongoose';
-import { IStudent, StudentModel } from './student.interface';
+import { IStudent, StudentModel } from './student.Interface';
+import { bloodGroup, gender } from './studentConstant';
 
-export const StudentSchema = new Schema<IStudent, StudentModel>(
+export const studentSchema = new Schema<IStudent, StudentModel>(
   {
     id: {
       type: String,
@@ -24,11 +25,11 @@ export const StudentSchema = new Schema<IStudent, StudentModel>(
     },
     gender: {
       type: String,
-      enum: ['male', 'female'],
+      enum: gender,
     },
     bloodGroup: {
       type: String,
-      enum: ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'],
+      enum: bloodGroup,
     },
     email: {
       type: String,
@@ -46,7 +47,7 @@ export const StudentSchema = new Schema<IStudent, StudentModel>(
     },
     presentAddress: { type: String, required: true },
     permanentAddress: { type: String, required: true },
-    Guardians: {
+    guardians: {
       required: true,
       type: {
         fatherName: {
@@ -72,7 +73,6 @@ export const StudentSchema = new Schema<IStudent, StudentModel>(
     },
     profileImage: {
       type: String,
-      required: true,
     },
     academicFaculty: {
       type: Schema.Types.ObjectId,
@@ -93,4 +93,4 @@ export const StudentSchema = new Schema<IStudent, StudentModel>(
   { timestamps: true, toJSON: { virtuals: true } },
 );
 
-export const Student = model<IStudent, StudentModel>('Student', StudentSchema);
+export const Student = model<IStudent, StudentModel>('Student', studentSchema);
