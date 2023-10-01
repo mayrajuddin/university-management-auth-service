@@ -71,9 +71,6 @@ export const studentSchema = new Schema<IStudent, StudentModel>(
         contactNo: { type: String, required: true },
       },
     },
-    profileImage: {
-      type: String,
-    },
     academicFaculty: {
       type: Schema.Types.ObjectId,
       required: true,
@@ -88,6 +85,9 @@ export const studentSchema = new Schema<IStudent, StudentModel>(
       type: Schema.Types.ObjectId,
       required: true,
       ref: 'academicSemester',
+    },
+    profileImage: {
+      type: String,
     },
   },
   { timestamps: true, toJSON: { virtuals: true } },

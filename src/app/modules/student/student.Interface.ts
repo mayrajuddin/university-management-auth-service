@@ -36,9 +36,9 @@ export type IStudent = {
   permanentAddress: string;
   guardians: Guardians;
   localGuardian: LocalGuardian;
-  profileImage?: string;
   academicFaculty: Types.ObjectId | IAcademicFaculty;
   academicDepartment: Types.ObjectId | IAcademicDepartment;
   academicSemester: Types.ObjectId | IAcademicSemester;
+  profileImage?: string;
 };
 export type StudentModel = Model<IStudent, Record<string, unknown>>;

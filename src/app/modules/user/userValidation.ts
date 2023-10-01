@@ -10,7 +10,7 @@ const createUserZodSchema = z.object({
         middleName: z.string().optional(),
         lastName: z.string({ required_error: 'Last Name is Required!' }),
       }),
-      dateOfBirth: z.string({ required_error: 'Birth date is Required!' }),
+      dateOfBirth: z.string({ required_error: 'Date of birth is Required!' }),
       gender: z.enum([...gender] as [string], {
         required_error: 'Gender is Required!',
       }),
@@ -51,7 +51,6 @@ const createUserZodSchema = z.object({
         address: z.string({ required_error: 'Address is required!' }),
         contactNo: z.string({ required_error: 'Contact number is required!' }),
       }),
-      profileImage: z.string().optional(),
       academicFaculty: z.string({
         required_error: 'Academic faculty is required!',
       }),
@@ -61,6 +60,7 @@ const createUserZodSchema = z.object({
       academicSemester: z.string({
         required_error: 'Academic semester is required!',
       }),
+      profileImage: z.string().optional(),
     }),
   }),
 });
