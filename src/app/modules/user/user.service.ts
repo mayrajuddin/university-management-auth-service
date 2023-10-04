@@ -1,6 +1,5 @@
 import mongoose from 'mongoose';
 import config from '../../../config';
-import apiError from '../../../errors/ApiErrors';
 import { AcademicSemester } from '../academicSemester/academicSemester.Model';
 import { IStudent } from '../student/student.Interface';
 import { IUser } from './user.interface';
@@ -23,12 +22,13 @@ const createStudent = async (
   const academicSemester = await AcademicSemester.findById(
     student.academicSemester,
   );
+  let newUserAllData = null;
   const session = await mongoose.startSession();
   try {
     session.startTransaction();
     const id = await generateStudentId(academicSemester);
-    user.id = id;
     student.id = id;
+    user.id = id;
     const newStudent = await Student.create([student], { session });
     //if failed to create student
     if (!newStudent.length) {
@@ -40,18 +40,24 @@ const createStudent = async (
     if (!newUser.length) {
       throw new ApiError(httpStatus.BAD_REQUEST, 'Failed to create user');
     }
-
+    newUserAllData = newUser[0];
     await session.commitTransaction();
     await session.endSession();
   } catch (error) {
     await session.abortTransaction();
     await session.endSession();
   }
-  const createdUser = await User.create(user);
-  // if (!createdUser) {
-  //   throw new apiError(400, 'User not created');
-  // }
-  return createdUser;
+  if (newUserAllData) {
+    newUserAllData = await User.findOne({ id: newUserAllData.id }).populate({
+      path: 'student',
+      populate: [
+        { path: 'academicFaculty' },
+        { path: 'academicDepartment' },
+        { path: 'academicSemester' },
+      ],
+    });
+  }
+  return newUserAllData;
 };
 
 export const UserService = {

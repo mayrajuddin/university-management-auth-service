@@ -1,0 +1,5 @@
+2023-10-04T06:12:17.008Z [right meow!] error: E11000 duplicate key error collection: university-management.academicfaculties index: title_1 dup key: { title: "FACULTY OF HUMANITIES, SOCIAL SCIENCES & LAW" }
+2023-10-04T06:28:45.597Z [right meow!] error: Schema hasn't been registered for model "student".
+Use mongoose.model(name, schema)
+2023-10-04T06:34:33.485Z [right meow!] error: Schema hasn't been registered for model "academicSemester".
+Use mongoose.model(name, schema)

@@ -34,7 +34,7 @@ export type IStudent = {
   emergencyContactNo: string;
   presentAddress: string;
   permanentAddress: string;
-  guardians: Guardians;
+  guardian: Guardians;
   localGuardian: LocalGuardian;
   academicFaculty: Types.ObjectId | IAcademicFaculty;
   academicDepartment: Types.ObjectId | IAcademicDepartment;

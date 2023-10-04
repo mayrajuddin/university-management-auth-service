@@ -47,7 +47,7 @@ export const studentSchema = new Schema<IStudent, StudentModel>(
     },
     presentAddress: { type: String, required: true },
     permanentAddress: { type: String, required: true },
-    guardians: {
+    guardian: {
       required: true,
       type: {
         fatherName: {
@@ -93,4 +93,4 @@ export const studentSchema = new Schema<IStudent, StudentModel>(
   { timestamps: true, toJSON: { virtuals: true } },
 );
 
-export const Student = model<IStudent, StudentModel>('Student', studentSchema);
+export const Student = model<IStudent, StudentModel>('student', studentSchema);

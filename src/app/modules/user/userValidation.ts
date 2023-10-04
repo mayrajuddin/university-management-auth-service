@@ -18,7 +18,7 @@ const createUserZodSchema = z.object({
         required_error: 'Blood group is Required!',
       }),
       email: z.string({ required_error: 'Email is Required!' }),
-      constactNo: z.string({ required_error: 'Contact Number is Required!' }),
+      contactNo: z.string({ required_error: 'Contact Number is Required!' }),
       emergencyContactNo: z.string({
         required_error: 'Emergency contact number is required!',
       }),
@@ -28,7 +28,7 @@ const createUserZodSchema = z.object({
       permanentAddress: z.string({
         required_error: 'Permanent address is required!',
       }),
-      guardians: z.object({
+      guardian: z.object({
         fatherName: z.string({ required_error: 'Father name is required!' }),
         fatherOccupation: z.string({
           required_error: 'Father occupation is Required!',
