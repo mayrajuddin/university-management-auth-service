@@ -35,6 +35,9 @@ const getAllStudents = async (
   }
   const whereCondition = andCondition.length > 0 ? { $and: andCondition } : {};
   const result = await Student.find(whereCondition)
+    .populate('academicFaculty')
+    .populate('academicDepartment')
+    .populate('academicSemester')
     .sort(sortConditon)
     .skip(skip)
     .limit(limit);
@@ -50,7 +53,10 @@ const getAllStudents = async (
   };
 };
 const getSingleStudent = async (id: string): Promise<IStudent | null> => {
-  const result = await Student.findById(id);
+  const result = await Student.findById(id)
+    .populate('academicFaculty')
+    .populate('academicDepartment')
+    .populate('academicSemester');
   return result;
 };
 const updateStudent = async (id: string, payload: Partial<IStudent>) => {
