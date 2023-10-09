@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import catchAsync from '../../../shared/catchAsync';
-import { academicFacultyService } from './academicFaculty.Service';
+import { AcademicFacultyService } from './academicFaculty.Service';
 import sendResponse from '../../../shared/sendResponse';
 import httpStatus from 'http-status';
 import { IAcademicFaculty } from './academicFaculty.Interface';
@@ -11,7 +11,7 @@ import { paginationFields } from '../../../constants/paginations';
 const createFaculty = catchAsync(async (req: Request, res: Response) => {
   const { ...academicFacultyData } = req.body;
 
-  const result = await academicFacultyService.createAcademicFaculty(
+  const result = await AcademicFacultyService.createAcademicFaculty(
     academicFacultyData,
   );
 
@@ -25,7 +25,7 @@ const createFaculty = catchAsync(async (req: Request, res: Response) => {
 const getAllFaculties = catchAsync(async (req: Request, res: Response) => {
   const filter = pick(req.query, academicFacultyFilterAbleField);
   const paginationOptions = pick(req.query, paginationFields);
-  const result = await academicFacultyService.getAllFaculties(
+  const result = await AcademicFacultyService.getAllFaculties(
     filter,
     paginationOptions,
   );
@@ -40,7 +40,7 @@ const getAllFaculties = catchAsync(async (req: Request, res: Response) => {
 
 const getSingleFaculty = catchAsync(async (req: Request, res: Response) => {
   const id = req.params.id;
-  const result = await academicFacultyService.getSingleFaculty(id);
+  const result = await AcademicFacultyService.getSingleFaculty(id);
   sendResponse<IAcademicFaculty>(res, {
     statusCode: httpStatus.OK,
     success: true,
@@ -51,7 +51,7 @@ const getSingleFaculty = catchAsync(async (req: Request, res: Response) => {
 const updateFaculty = catchAsync(async (req: Request, res: Response) => {
   const id = req.params.id;
   const updatedData = req.body;
-  const result = await academicFacultyService.updateFaculty(id, updatedData);
+  const result = await AcademicFacultyService.updateFaculty(id, updatedData);
   sendResponse<IAcademicFaculty>(res, {
     statusCode: httpStatus.OK,
     success: true,
@@ -61,7 +61,7 @@ const updateFaculty = catchAsync(async (req: Request, res: Response) => {
 });
 const deleteFaculty = catchAsync(async (req: Request, res: Response) => {
   const id = req.params.id;
-  const result = await academicFacultyService.deleteFaculty(id);
+  const result = await AcademicFacultyService.deleteFaculty(id);
   sendResponse<IAcademicFaculty>(res, {
     statusCode: httpStatus.OK,
     success: true,
@@ -69,7 +69,7 @@ const deleteFaculty = catchAsync(async (req: Request, res: Response) => {
     data: result,
   });
 });
-export const academicFacultyController = {
+export const AcademicFacultyController = {
   createFaculty,
   getAllFaculties,
   getSingleFaculty,

@@ -16,7 +16,7 @@ const updateAcademicDepartmentZodSchema = z.object({
     academicFaculty: z.string().optional(),
   }),
 });
-export const academicDepartmentValidation = {
+export const AcademicDepartmentValidation = {
   academicDepartmentZodSchema,
   updateAcademicDepartmentZodSchema,
 };

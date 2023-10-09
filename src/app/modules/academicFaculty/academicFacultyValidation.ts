@@ -7,6 +7,6 @@ const createAcademiFacultyZodSchema = z.object({
     }),
   }),
 });
-export const academicFacultyValidation = {
+export const AcademicFacultyValidation = {
   createAcademiFacultyZodSchema,
 };

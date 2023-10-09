@@ -82,7 +82,7 @@ const deleteAcademicDepartment = async (
   const result = await academicDepartment.findByIdAndDelete(id);
   return result;
 };
-export const academicDepartmentService = {
+export const AcademicDepartmentService = {
   createAcademicDepartment,
   getAllAcademicDepartment,
   getAcademicDepartment,

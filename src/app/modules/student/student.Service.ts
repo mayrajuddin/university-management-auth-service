@@ -41,7 +41,7 @@ const getAllStudents = async (
     .sort(sortConditon)
     .skip(skip)
     .limit(limit);
-  const total = await Student.countDocuments();
+  const total = await Student.countDocuments(whereCondition);
 
   return {
     meta: {

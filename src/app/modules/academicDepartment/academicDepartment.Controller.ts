@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import catchAsync from '../../../shared/catchAsync';
-import { academicDepartmentService } from './academicDepartment.Service';
+import { AcademicDepartmentService } from './academicDepartment.Service';
 import sendResponse from '../../../shared/sendResponse';
 import { IAcademicDepartment } from './academicDepartment.Interface';
 import httpStatus from 'http-status';
@@ -11,7 +11,7 @@ import { academicFacultyFilterAbleField } from '../academicFaculty/academicFacul
 const createAcademicDepartment = catchAsync(
   async (req: Request, res: Response) => {
     const { ...academicDepartmentData } = req.body;
-    const result = await academicDepartmentService.createAcademicDepartment(
+    const result = await AcademicDepartmentService.createAcademicDepartment(
       academicDepartmentData,
     );
     sendResponse<IAcademicDepartment>(res, {
@@ -27,7 +27,7 @@ const getAllAcademicDepartment = catchAsync(
   async (req: Request, res: Response) => {
     const filter = pick(req.query, academicFacultyFilterAbleField);
     const paginationOptions = pick(req.query, paginationFields);
-    const result = await academicDepartmentService.getAllAcademicDepartment(
+    const result = await AcademicDepartmentService.getAllAcademicDepartment(
       filter,
       paginationOptions,
     );
@@ -43,7 +43,7 @@ const getAllAcademicDepartment = catchAsync(
 const getAcademicDepartment = catchAsync(
   async (req: Request, res: Response) => {
     const { id } = req.params;
-    const result = await academicDepartmentService.getAcademicDepartment(id);
+    const result = await AcademicDepartmentService.getAcademicDepartment(id);
     sendResponse<IAcademicDepartment>(res, {
       statusCode: httpStatus.OK,
       success: true,
@@ -57,7 +57,7 @@ const updateAcademicDepartment = catchAsync(
   async (req: Request, res: Response) => {
     const { id } = req.params;
     const updatedData = req.body;
-    const result = await academicDepartmentService.updateAcademicDepartment(
+    const result = await AcademicDepartmentService.updateAcademicDepartment(
       id,
       updatedData,
     );
@@ -72,7 +72,7 @@ const updateAcademicDepartment = catchAsync(
 const deleteAcademicDepartment = catchAsync(
   async (req: Request, res: Response) => {
     const { id } = req.params;
-    const result = await academicDepartmentService.deleteAcademicDepartment(id);
+    const result = await AcademicDepartmentService.deleteAcademicDepartment(id);
     sendResponse(res, {
       statusCode: httpStatus.OK,
       success: true,
@@ -81,7 +81,7 @@ const deleteAcademicDepartment = catchAsync(
     });
   },
 );
-export const academicDepartmentController = {
+export const AcademicDepartmentController = {
   createAcademicDepartment,
   getAllAcademicDepartment,
   getAcademicDepartment,
