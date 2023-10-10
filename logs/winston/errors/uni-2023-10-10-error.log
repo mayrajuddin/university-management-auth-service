@@ -1,1 +1,5 @@
 2023-10-10T15:03:18.173Z [right meow!] error: Cast to ObjectId failed for value "230300001" (type string) at path "_id" for model "student"
+2023-10-10T17:22:22.461Z [right meow!] error: Cannot populate path `faculty` because it is not in your schema. Set the `strictPopulate` option to false to override.
+2023-10-10T17:26:52.668Z [right meow!] error: Cannot populate path `faculty` because it is not in your schema. Set the `strictPopulate` option to false to override.
+2023-10-10T17:42:45.140Z [right meow!] error: Cannot populate path `faculty` because it is not in your schema. Set the `strictPopulate` option to false to override.
+2023-10-10T17:56:36.879Z [right meow!] error: E11000 duplicate key error collection: university-management.faculties index: id_1 dup key: { id: "F-300002" }

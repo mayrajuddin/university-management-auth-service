@@ -78,15 +78,24 @@ const createFaculy = async (faculty: IFaculty, user: IUser) => {
     if (!newFaculty.length) {
       throw new ApiError(httpStatus.BAD_REQUEST, 'Failed to create faculty!');
     }
-    newUserAllData = newFaculty[0];
+    user.faculty = newFaculty[0]._id;
+
+    //create faculty as user
+    const newUser = await User.create([user], { session });
+    if (!newUser.length) {
+      throw new ApiError(httpStatus.BAD_REQUEST, 'Failed to create user!');
+    }
+    newUserAllData = newUser[0];
+
     await session.commitTransaction();
     await session.endSession();
   } catch (error) {
     await session.abortTransaction();
     await session.endSession();
+    throw error;
   }
   if (newUserAllData) {
-    newUserAllData = await Faculty.findOne({ id: newUserAllData.id }).populate({
+    newUserAllData = await User.findOne({ id: newUserAllData.id }).populate({
       path: 'faculty',
       populate: [{ path: 'academicDepartment' }, { path: 'academicFaculty' }],
     });
