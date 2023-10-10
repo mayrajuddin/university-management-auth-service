@@ -28,7 +28,7 @@ export const findLastFacultyId = async () => {
       createdAt: -1,
     })
     .lean();
-  return lastFaculty?.id ? lastFaculty.id.substring(4) : undefined;
+  return lastFaculty?.id ? lastFaculty.id.substring(2) : undefined;
 };
 export const generateFacultyId = async () => {
   const currentId =

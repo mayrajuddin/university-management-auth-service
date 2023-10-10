@@ -1,0 +1,1 @@
+2023-10-10T15:03:18.173Z [right meow!] error: Cast to ObjectId failed for value "230300001" (type string) at path "_id" for model "student"

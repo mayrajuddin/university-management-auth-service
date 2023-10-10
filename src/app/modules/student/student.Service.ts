@@ -89,13 +89,9 @@ const updateStudent = async (id: string, payload: Partial<IStudent>) => {
         localGuardian[key as keyof typeof localGuardian];
     });
   }
-  const result = await Student.findOneAndUpdate(
-    { _id: id },
-    updatedStudentData,
-    {
-      new: true,
-    },
-  );
+  const result = await Student.findOneAndUpdate({ id }, updatedStudentData, {
+    new: true,
+  });
   return result;
 };
 const deleteStudent = async (id: string) => {
