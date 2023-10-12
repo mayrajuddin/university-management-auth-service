@@ -1,4 +1,5 @@
 import { IAcademicSemester } from '../academicSemester/academicSemester.Interface';
+import { Faculty } from '../faculty/faculty.Model';
 import { User } from './user.model';
 
 export const findLastStudentId = async () => {
@@ -23,7 +24,7 @@ export const generateStudentId = async (
   return incrementedId;
 };
 export const findLastFacultyId = async () => {
-  const lastFaculty = await User.findOne({}, { id: 1, _id: 0 })
+  const lastFaculty = await Faculty.findOne({}, { id: 1, _id: 0 })
     .sort({
       createdAt: -1,
     })

@@ -24,10 +24,10 @@ export type IFaculty = {
   profileImage?: string;
 };
 export type FacultyModel = Model<IFaculty, Record<string, unknown>>;
-// export type IStudentFilter = {
-//   searchTerm?: string;
-//   id?: string;
-//   bloodGroup?: string;
-//   contactNo?: string;
-//   email?: string;
-// };
+export type IFacultyFilter = {
+  searchTerm?: string;
+  id?: string;
+  bloodGroup?: string;
+  contactNo?: string;
+  email?: string;
+};
