@@ -1,9 +1,9 @@
 import { IAcademicSemester } from '../academicSemester/academicSemester.Interface';
 import { Faculty } from '../faculty/faculty.Model';
-import { User } from './user.model';
+import { Student } from '../student/student.Model';
 
 export const findLastStudentId = async () => {
-  const lastStudent = await User.findOne({}, { id: 1, _id: 0 })
+  const lastStudent = await Student.findOne({}, { id: 1, _id: 0 })
     .sort({
       createdAt: -1,
     })

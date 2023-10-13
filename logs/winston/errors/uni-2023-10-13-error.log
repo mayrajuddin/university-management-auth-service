@@ -1,2 +1,3 @@
 2023-10-12T18:11:43.182Z [right meow!] error: Faculty not found!
 2023-10-12T18:13:27.012Z [right meow!] error: Faculty not found!
+2023-10-13T06:46:19.692Z [right meow!] error: Attempted illegal state transition from [TRANSACTION_ABORTED] to [TRANSACTION_COMMITTED]

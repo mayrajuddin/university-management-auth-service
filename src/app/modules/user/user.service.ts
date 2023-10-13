@@ -29,8 +29,8 @@ const createStudent = async (
   try {
     session.startTransaction();
     const id = await generateStudentId(academicSemester);
-    student.id = id;
     user.id = id;
+    student.id = id;
     const newStudent = await Student.create([student], { session });
     //if failed to create student
     if (!newStudent.length) {

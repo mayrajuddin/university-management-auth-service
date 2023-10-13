@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { SortOrder } from 'mongoose';
+import mongoose, { SortOrder } from 'mongoose';
 import { paginationHelper } from '../../../helper/paginationHelper';
 import { IGenericResponse } from '../../../interface/common';
 import { IPaginations } from '../../../interface/pagination';
@@ -8,6 +8,7 @@ import { Faculty } from './faculty.Model';
 import { searchAbleFields } from './facultyConstant';
 import ApiError from '../../../errors/ApiErrors';
 import httpStatus from 'http-status';
+import { User } from '../user/user.model';
 
 const getAllFaculties = async (
   filters: IFacultyFilter,
@@ -77,8 +78,31 @@ const updateFaculty = async (id: string, payload: Partial<IFaculty>) => {
   });
   return result;
 };
+const deleteFaculty = async (id: string) => {
+  const isExist = await Faculty.findOne({ id });
+  if (!isExist) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Faculty not found');
+  }
+  const session = await mongoose.startSession();
+  try {
+    session.startTransaction();
+    const faculty = await Faculty.findOneAndDelete({ id }, { session });
+    if (!faculty) {
+      throw new ApiError(httpStatus.BAD_REQUEST, 'Failed to delete faculty!');
+    }
+    await User.deleteOne({ id });
+    session.commitTransaction();
+    session.endSession();
+    return faculty;
+  } catch (error) {
+    session.abortTransaction();
+    session.endSession();
+    throw error;
+  }
+};
 export const FacultyService = {
   getAllFaculties,
   getSingleFaculty,
   updateFaculty,
+  deleteFaculty,
 };
