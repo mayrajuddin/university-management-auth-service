@@ -9,6 +9,7 @@ import { IPaginations } from '../../../interface/pagination';
 import { paginationHelper } from '../../../helper/paginationHelper';
 import { SortOrder } from 'mongoose';
 import { departmentSearchableField } from '../academicDepartment/academicDepartmentConstant';
+import { IGenericResponse } from '../../../interface/common';
 
 const createDepartment = async (
   payload: IManagementDepartment,
@@ -23,7 +24,7 @@ const getSingleDepartment = async (id: string) => {
 const getAllDepartment = async (
   filters: IDepartmentFielters,
   pagination: IPaginations,
-) => {
+): Promise<IGenericResponse<IManagementDepartment[] | null>> => {
   const { page, limit, skip, sortBy, sortOrder } =
     paginationHelper.calculatePagination(pagination);
   const sortConditon: { [key: string]: SortOrder } = {};
@@ -81,9 +82,18 @@ const updateDepartment = async (
   return result;
 };
 
+const deleteDepartment = async (id: string) => {
+  const isExist = await ManagementDepartment.findOne({ _id: id });
+  if (!isExist) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Management department not found');
+  }
+  const result = await ManagementDepartment.findOneAndDelete({ _id: id });
+  return result;
+};
 export const ManagementDepartmentService = {
   createDepartment,
   getSingleDepartment,
   updateDepartment,
   getAllDepartment,
+  deleteDepartment,
 };
