@@ -4,6 +4,9 @@ import { ManagementDepartmentService } from './managementDepartment.Service';
 import sendResponse from '../../../shared/sendResponse';
 import httpStatus from 'http-status';
 import { IManagementDepartment } from './managementDepartment.Interface';
+import pick from '../../../shared/pick';
+import { departmentFielter } from './managementDepartmentConstant';
+import { paginationFields } from '../../../constants/paginations';
 
 const createDepartment: RequestHandler = catchAsync(
   async (req: Request, res: Response) => {
@@ -32,6 +35,24 @@ const getSingleDepartment: RequestHandler = catchAsync(
     });
   },
 );
+
+const getAllDepartment: RequestHandler = catchAsync(
+  async (req: Request, res: Response) => {
+    const filters = pick(req.query, departmentFielter);
+    const paginationOptions = pick(req.query, paginationFields);
+    const result = await ManagementDepartmentService.getAllDepartment(
+      filters,
+      paginationOptions,
+    );
+    sendResponse<IManagementDepartment[]>(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'Management department retrieved successfully!',
+      meta: result.meta,
+      data: result.data,
+    });
+  },
+);
 const updateDepartment: RequestHandler = catchAsync(
   async (req: Request, res: Response) => {
     const id = req.params.id;
@@ -51,5 +72,6 @@ const updateDepartment: RequestHandler = catchAsync(
 export const ManagementDepartmentController = {
   createDepartment,
   getSingleDepartment,
+  getAllDepartment,
   updateDepartment,
 };

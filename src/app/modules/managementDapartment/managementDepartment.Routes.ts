@@ -5,9 +5,18 @@ import validateRequest from '../../middlewares/validateRequest';
 const router = express.Router();
 router.post(
   '/create-department',
-  validateRequest(ManagementDepartmentValidation.managementDapartmentZodSchema),
+  validateRequest(
+    ManagementDepartmentValidation.createManagementDapartmentZodSchema,
+  ),
   ManagementDepartmentController.createDepartment,
 );
 router.get('/:id', ManagementDepartmentController.getSingleDepartment);
-router.patch('/:id', ManagementDepartmentController.updateDepartment);
+router.patch(
+  '/:id',
+  validateRequest(
+    ManagementDepartmentValidation.updateManagementDapartmentZodSchema,
+  ),
+  ManagementDepartmentController.updateDepartment,
+);
+router.get('/', ManagementDepartmentController.getAllDepartment);
 export const ManagementDepartmentRoutes = router;
