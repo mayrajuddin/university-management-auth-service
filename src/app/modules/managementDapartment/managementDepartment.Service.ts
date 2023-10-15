@@ -7,6 +7,11 @@ const createDepartment = async (
   const result = await ManagementDepartment.create(payload);
   return result;
 };
+const getSingleDepartment = async (id: string) => {
+  const result = await ManagementDepartment.findById(id);
+  return result;
+};
 export const ManagementDepartmentService = {
   createDepartment,
+  getSingleDepartment,
 };
