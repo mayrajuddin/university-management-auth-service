@@ -32,7 +32,24 @@ const getSingleDepartment: RequestHandler = catchAsync(
     });
   },
 );
+const updateDepartment: RequestHandler = catchAsync(
+  async (req: Request, res: Response) => {
+    const id = req.params.id;
+    const updatedData = req.body;
+    const result = await ManagementDepartmentService.updateDepartment(
+      id,
+      updatedData,
+    );
+    sendResponse<IManagementDepartment>(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'Management department updated successfully!',
+      data: result,
+    });
+  },
+);
 export const ManagementDepartmentController = {
   createDepartment,
   getSingleDepartment,
+  updateDepartment,
 };

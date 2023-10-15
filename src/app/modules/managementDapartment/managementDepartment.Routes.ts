@@ -9,4 +9,5 @@ router.post(
   ManagementDepartmentController.createDepartment,
 );
 router.get('/:id', ManagementDepartmentController.getSingleDepartment);
+router.patch('/:id', ManagementDepartmentController.updateDepartment);
 export const ManagementDepartmentRoutes = router;
