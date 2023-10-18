@@ -1,4 +1,5 @@
 import { IAcademicSemester } from '../academicSemester/academicSemester.Interface';
+
 import { Faculty } from '../faculty/faculty.Model';
 import { Student } from '../student/student.Model';
 
