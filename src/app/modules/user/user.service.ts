@@ -146,6 +146,7 @@ const createAdmin = async (admin: IAdmin, user: IUser) => {
       populate: [{ path: 'managementDepartment' }],
     });
   }
+  return newUserAllData;
 };
 export const UserService = {
   createStudent,
