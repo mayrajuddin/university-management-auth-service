@@ -8,6 +8,6 @@ export type IUser = {
   password: string;
   student?: Types.ObjectId | IStudent;
   faculty?: Types.ObjectId | IFaculty;
-  // admin?: Types.ObjectId;
+  admin?: Types.ObjectId;
 };
 export type UserModel = Model<IUser, Record<string, unknown>>;

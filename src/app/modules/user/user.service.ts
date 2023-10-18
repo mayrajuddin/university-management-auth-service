@@ -4,12 +4,18 @@ import { AcademicSemester } from '../academicSemester/academicSemester.Model';
 import { IStudent } from '../student/student.Interface';
 import { IUser } from './user.interface';
 import { User } from './user.model';
-import { generateFacultyId, generateStudentId } from './users.utilis';
+import {
+  generateAdminId,
+  generateFacultyId,
+  generateStudentId,
+} from './users.utilis';
 import { Student } from '../student/student.Model';
 import ApiError from '../../../errors/ApiErrors';
 import httpStatus from 'http-status';
 import { IFaculty } from '../faculty/faculty.Interface';
 import { Faculty } from '../faculty/faculty.Model';
+import { IAdmin } from '../admin/admin.Interface';
+import { Admin } from '../admin/admin.Model';
 
 const createStudent = async (
   student: IStudent,
@@ -102,7 +108,47 @@ const createFaculy = async (faculty: IFaculty, user: IUser) => {
   }
   return newUserAllData;
 };
+
+const createAdmin = async (admin: IAdmin, user: IUser) => {
+  if (!user.password) {
+    user.password = config.admin_default_pass as string;
+  }
+  user.role = 'admin';
+  let newUserAllData = null;
+  const session = await mongoose.startSession();
+  try {
+    session.startTransaction();
+    const id = await generateAdminId();
+    user.id = id;
+    admin.id = id;
+    const newAdmin = await Admin.create([admin], { session });
+    if (!newAdmin.length) {
+      throw new ApiError(httpStatus.BAD_REQUEST, 'Failed to create admin!');
+    }
+    user.admin = newAdmin[0]._id;
+
+    //create admin as user
+    const newUser = await User.create([user], { session });
+    if (!newUser.length) {
+      throw new ApiError(httpStatus.BAD_REQUEST, 'Failed to create user!');
+    }
+    newUserAllData = newUser[0];
+    await session.commitTransaction();
+    await session.endSession();
+  } catch (error) {
+    await session.abortTransaction();
+    await session.endSession();
+    throw error;
+  }
+  if (newUserAllData) {
+    newUserAllData = await User.findOne({ id: newUserAllData.id }).populate({
+      path: 'admin',
+      populate: [{ path: 'managementDepartment' }],
+    });
+  }
+};
 export const UserService = {
   createStudent,
   createFaculy,
+  createAdmin,
 };
