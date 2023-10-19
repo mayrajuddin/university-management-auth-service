@@ -4,8 +4,6 @@ import catchAsync from '../../../shared/catchAsync';
 import sendResponse from '../../../shared/sendResponse';
 import status from 'http-status';
 import { IUser } from './user.interface';
-import httpStatus from 'http-status';
-import { IAdmin } from '../admin/admin.Interface';
 const createStudent: RequestHandler = catchAsync(
   async (req: Request, res: Response) => {
     const { student, ...userData } = req.body;
@@ -36,7 +34,7 @@ const createAdmin: RequestHandler = catchAsync(
   async (req: Request, res: Response) => {
     const { admin, ...userData } = req.body;
     const result = await UserService.createAdmin(admin, userData);
-    sendResponse<IAdmin>(res, {
+    sendResponse<IUser>(res, {
       statusCode: status.OK,
       success: true,
       message: ' User created successfully',

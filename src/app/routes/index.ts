@@ -39,6 +39,10 @@ const moduleRoutes = [
     path: '/management-departments',
     route: ManagementDepartmentRoutes,
   },
+  {
+    path: '/admins',
+    route: ManagementDepartmentRoutes,
+  },
 ];
 moduleRoutes.forEach(route => router.use(route.path, route.route));
 
