@@ -50,7 +50,7 @@ const getAllAdmin = async (filters: IAdminFilter, pagination: IPaginations) => {
   };
 };
 const getSingleAdmin = async (id: string) => {
-  const result = await Admin.findById({ id }).populate('managementDepartment');
+  const result = await Admin.findById(id).populate('managementDepartment');
   return result;
 };
 const updateAdmin = async (id: string, payload: Partial<IAdmin>) => {
@@ -58,12 +58,12 @@ const updateAdmin = async (id: string, payload: Partial<IAdmin>) => {
   if (!isExist) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Admin not found!');
   }
-  const { name, ...updatedAdminData } = payload;
-  const updatedData = { ...updatedAdminData };
+  const { name, ...adminData } = payload;
+  const updatedData: Partial<IAdmin> = { ...adminData };
   if (name && Object.keys(name).length > 0) {
     Object.keys(name).forEach(key => {
       const namekey = `name.${key}`;
-      (updatedAdminData as any)[namekey] = name[key as keyof typeof name];
+      (updatedData as any)[namekey] = name[key as keyof typeof name];
     });
   }
   const result = await Admin.findOneAndUpdate({ id }, updatedData, {

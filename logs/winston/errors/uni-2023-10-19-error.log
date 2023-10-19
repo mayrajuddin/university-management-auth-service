@@ -1,0 +1,7 @@
+2023-10-19T17:43:13.853Z [right meow!] error: E11000 duplicate key error collection: university-management.admins index: contactNo_1 dup key: { contactNo: "477799000" }
+2023-10-19T17:44:45.513Z [right meow!] error: Cast to ObjectId failed for value "{ id: 'A-00002' }" (type Object) at path "_id" for model "admin"
+2023-10-19T17:47:14.407Z [right meow!] error: Cast to ObjectId failed for value "{ id: 'A-00002' }" (type Object) at path "_id" for model "admin"
+2023-10-19T17:49:38.625Z [right meow!] error: Cast to ObjectId failed for value "{ id: 'A-00002' }" (type Object) at path "_id" for model "admin"
+2023-10-19T17:53:25.222Z [right meow!] error: Cast to ObjectId failed for value "A-00002" (type string) at path "_id" for model "admin"
+2023-10-19T17:56:00.347Z [right meow!] error: Cast to ObjectId failed for value "F-00001" (type string) at path "_id" for model "faculty"
+2023-10-19T17:58:05.291Z [right meow!] error: Cast to ObjectId failed for value "{ id: 'A-00002' }" (type Object) at path "_id" for model "admin"

@@ -48,7 +48,7 @@ const adminSchema = new Schema<IAdmin>(
     presentAddress: { type: String, required: true },
     permanentAddress: { type: String, required: true },
     designation: { type: String, required: true },
-    managementDepartment: { type: String, required: true },
+    managementDepartment: { type: Schema.Types.ObjectId, required: true },
     profileImage: {
       type: String,
     },
